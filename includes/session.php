@@ -27,16 +27,22 @@
 
 
 	
-	function logout() 										// Terminate the session 
+	function logout()
 	{
-	    $_SESSION = [];										// Clear contents of array
-	    $params = session_get_cookie_params();				// Get session cookie parameters
+	    $_SESSION = [];
+	    $params = session_get_cookie_params();
 
-															// Delete session cookie
-	    setcookie('PHPSESSID', '', time() - 3600, $params['path'], $params['domain'],
-	        $params['secure'], $params['httponly']);	
+	    setcookie(
+            'PHPSESSID',
+            '',
+            time() - 3600,
+            $params['path'],
+            $params['domain'],
+	        $params['secure'],
+            $params['httponly']
+        );
 
-	    session_destroy();									// Delete session file							
+	    session_destroy();
 	}
 
 	
@@ -48,8 +54,19 @@
           4. Returns the matching user row if found
 	*/
 	
-	
-?>
+	function authenticate(PDO $pdo, string $username, string $password)
+	{
+    	$sql = "SELECT *
+            	FROM customer
+            	WHERE username = :username
+            	AND password = :password;";
+
+    	return pdo($pdo, $sql, [
+        	'username' => $username,
+        	'password' => $password
+    	])->fetch();
+	}
+
 
 
 

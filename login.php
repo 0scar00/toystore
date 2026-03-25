@@ -3,7 +3,8 @@
   /* TO-DO: Include header.php
             Hint: header.php is inside the includes folder and already connects to the database
   */
-
+  require_once 'includes/database-connection.php';
+  require_once 'includes/session.php';
 
   
   if ($logged_in) {                                       // If already logged in  
@@ -26,7 +27,7 @@
               Hint: You defined authenticate() earlier in session.php
     */
 
-
+    $user = authenticate($pdo, $username, $password);
 
     if ($user) {                               // If user data returned
       login($user);                           // Call the login function to update session data                                             
@@ -34,6 +35,8 @@
       exit;                                 // Stop further code running 
     }
   }
+
+  include 'includes/header.php';
 ?> 
 
 <div id="content" class="login-container animate-bottom">
