@@ -44,32 +44,37 @@ include 'includes/header.php';
 
 ?>
 
-<h1>Welcome, <?= htmlspecialchars($username) ?>!</h1>
+<main class="container profile-page">
 
-<?php if (!$orders) : ?>
-    <div class="no-orders">
-        <p>You have no orders yet.</p>
-    </div>
-<?php else : ?>
-    <div class="orders-container">
+    <h1>Welcome, <?= htmlspecialchars($username) ?>!</h1>
 
-        <?php foreach ($orders as $order) : ?>
-            <div class="order-card">
+    <?php if (!$orders) : ?>
+        <div class="no-orders">
+            <p>You have no orders yet.</p>
+        </div>
+    <?php else : ?>
+        <div class="orders-container">
 
-                <img src="<?= $order['img_src'] ?>" alt="<?= $order['toy_name'] ?>">
+            <?php foreach ($orders as $order) : ?>
+                <div class="order-card">
 
-                <div class="order-info">
-                    <p><strong>Order Number:</strong> <?= $order['orderID'] ?></p>
-                    <p><strong>Toy:</strong> <?= $order['toy_name'] ?></p>
-                    <p><strong>Quantity:</strong> <?= $order['quantity'] ?></p>
-                    <p><strong>Date Ordered:</strong> <?= $order['date_ordered'] ?></p>
-                    <p><strong>Delivery Address:</strong> Not Available</p>
-                    <p><strong>Delivery Date:</strong> <?= $order['delivery_date'] ?? 'Pending' ?></p>
+                    <img src="<?= $order['img_src'] ?>" alt="<?= $order['toy_name'] ?>">
+
+                    <div class="order-info">
+                        <p><strong>Order Number:</strong> <?= $order['orderID'] ?></p>
+                        <p><strong>Toy:</strong> <?= $order['toy_name'] ?></p>
+                        <p><strong>Quantity:</strong> <?= $order['quantity'] ?></p>
+                        <p><strong>Date Ordered:</strong> <?= $order['date_ordered'] ?></p>
+                        <p><strong>Delivery Address:</strong> Not Available</p>
+                        <p><strong>Delivery Date:</strong> <?= $order['delivery_date'] ?? 'Pending' ?></p>
+                    </div>
+
                 </div>
-            </div>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
 
-    </div>
-<?php endif; ?>
+        </div>
+    <?php endif; ?>
+
+</main>
 
 <?php include 'includes/footer.php'; ?>
